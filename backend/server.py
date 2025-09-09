@@ -108,42 +108,45 @@ async def analyze_fashion_image(file: UploadFile = File(...)):
         
         # Create fashion analysis prompt
         fashion_prompt = """
-        Analyze this fashion image comprehensively as an expert stylist. Provide your analysis in the following JSON format:
+        As an expert fashion stylist, analyze this image and provide styling advice. 
+        
+        IMPORTANT: Respond ONLY with valid JSON in this exact format (no additional text, no code blocks, no explanations):
 
         {
           "clothing_pieces": [
             {
-              "type": "dress/top/bottom/jacket/accessories/shoes",
-              "description": "detailed description of the item",
-              "colors": ["primary color", "accent color"],
-              "pattern": "solid/striped/floral/geometric/abstract/etc",
-              "fit": "loose/fitted/oversized/tailored",
-              "style_category": "casual/formal/business/party/sporty"
+              "type": "top/bottom/dress/jacket/shoes/accessories",
+              "description": "Clear description of the clothing item",
+              "colors": ["primary color", "secondary color"],
+              "pattern": "solid/striped/floral/plaid/geometric",
+              "fit": "fitted/loose/oversized/tailored",
+              "style_category": "casual/formal/business/trendy/classic"
             }
           ],
           "overall_analysis": {
-            "style_category": "minimalist/boho/classic/trendy/edgy/romantic/etc",
+            "style_category": "minimalist/bohemian/classic/trendy/edgy/romantic",
             "formality_level": "casual/smart-casual/business/formal",
             "season": "spring/summer/fall/winter/all-season",
-            "occasions": ["work", "casual", "date", "party", "wedding", "etc"]
+            "occasions": ["work", "casual outings", "dinner", "shopping"]
           },
           "styling_tips": [
-            "specific styling advice",
-            "how to improve the look",
-            "alternative styling options"
+            "Add a statement necklace to elevate this look",
+            "Pair with nude heels for a polished finish",
+            "Layer a blazer for a more professional appearance"
           ],
           "occasion_recommendations": [
-            "best occasions for this outfit",
-            "where this style works well"
+            "Perfect for business casual meetings",
+            "Great for weekend brunch with friends",
+            "Suitable for casual date nights"
           ],
           "color_palette": [
-            "dominant color",
-            "accent colors",
-            "complementary colors that would work"
+            "Navy blue",
+            "Cream white", 
+            "Rose gold accents"
           ]
         }
 
-        Provide detailed, professional styling advice. Be specific about colors, fits, and styling techniques.
+        Provide 3-5 specific, actionable styling tips. Focus on practical advice about accessories, layering, colors, and occasion appropriateness.
         """
         
         # Create image content
