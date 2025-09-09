@@ -123,6 +123,17 @@ class FashionAPITester:
                     print(f"  - Styling tips: {len(analysis.get('styling_tips', []))}")
                     print(f"  - Color palette: {len(analysis.get('color_palette', []))}")
                     print(f"  - Overall analysis: {bool(analysis.get('overall_analysis'))}")
+                    
+                    # CRITICAL: Check styling tips content for raw JSON
+                    styling_tips = analysis.get('styling_tips', [])
+                    print("\n🔍 CRITICAL CHECK - Styling Tips Content:")
+                    for i, tip in enumerate(styling_tips):
+                        print(f"  Tip {i+1}: {tip}")
+                        # Check if tip contains JSON-like content
+                        if '{' in tip or '}' in tip or '"' in tip:
+                            print(f"  ⚠️  WARNING: Tip {i+1} may contain raw JSON content!")
+                        else:
+                            print(f"  ✅ Tip {i+1} looks like proper styling advice")
             
             return success, response
             
